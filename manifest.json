@@ -4,6 +4,9 @@
 	"version": "1",
 	
 
+	"permissions": [
+		"tabs"
+	],
 	"description": "Searches web pages for steam keys then creates a list of them.",
 	//TODO: "icons": path
 	
@@ -11,5 +14,18 @@
 	{
 		"default_icon": "icon.png",
 		"default_popup": "popup.html"
-	}
+	},
+	"content_scripts": 
+	[
+		{	"matches": 
+			[
+			"https://www.indiegala.com/*"
+			],
+		
+			"js": 
+				[
+					"contentscript.js"
+				]
+		}
+	]
 }
