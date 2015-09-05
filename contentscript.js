@@ -1,8 +1,9 @@
-chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    console.log(sender.tab ?
-                "from a content script:" + sender.tab.url :
-                "from the extension");
-    if (request.greeting == "hello")
-      sendResponse({farewell: "goodbye"});
-  });
+
+chrome.extension.onMessage.addListener(function(msg, sender, sendResponse) {
+
+  if (msg.action == 'search') {
+    var pageHtml = document.documentElement.outerHTML;
+    alert(document.documentElement.outerHTML)
+    sendResponse({data: pageHtml.toString()});
+  }
+});
