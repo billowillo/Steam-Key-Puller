@@ -6,9 +6,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function activateSearch() {
 
-	chrome.tabs.query({currentWindow: true, active: true}, function(tab) { /*Select active tab of the current window*/
-       chrome.tabs.sendMessage(tabs[0].id, {line: 'countparas'}); /*Send a message to the content script*/
-    });
+	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+		chrome.tabs.sendMessage(tabs[0].id, { action: "search" }, function (data) {
+			if (typeof data !='undefined') {
+				console.log("Message in popup" + data);
+			}
+
+			//var steamKeys = data.match(/[A-Z0-9]+-[A-Z0-9]+-[A-Z0-9]+/);
+		});
+	});
 	//steam key match regex [A-Z0-9]+-[A-Z0-9]+-[A-Z0-9]+
 	
 	//get website html to be able to search for keys within
